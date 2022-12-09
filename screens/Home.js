@@ -4,9 +4,12 @@ import { Image, ScrollView, Text, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { AntDesign, Entypo } from "@expo/vector-icons";
 import Categories from "../components/Categories";
+import FeaturedRow from "../components/FeaturedRow";
+import { styled } from "nativewind";
+const AntDesignIcon = styled(AntDesign);
+
 const Home = () => {
   const navigation = useNavigation();
-
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: false,
@@ -29,8 +32,9 @@ const Home = () => {
               <Text className="text-gray-400 font-bold">Delivery now!</Text>
               <View className="flex flex-row items-center">
                 <Text className="font-bold text-lg mr-1">Current Location</Text>
-                <AntDesign
-                  style={{ paddingTop: 5 }}
+
+                <AntDesignIcon
+                  className="pt-1"
                   name="down"
                   size={14}
                   color="#3cae9f"
@@ -38,13 +42,13 @@ const Home = () => {
               </View>
             </View>
           </View>
-          <AntDesign name="user" size={28} color="#3cae9f" />
+          <AntDesignIcon name="user" size={28} color="#3cae9f" />
         </View>
 
         {/* SEARCH */}
         <View className="flex flex-row items-center">
           <View className="flex-1 flex-row items-center bg-gray-100 space-x-2  rounded-sm p-2 mr-3">
-            <AntDesign name="search1" size={18} color="#3cae9f" />
+            <AntDesignIcon name="search1" size={18} color="#3cae9f" />
             <TextInput
               placeholder="Restaurants and cuisines"
               className="bg-transparent"
@@ -63,6 +67,26 @@ const Home = () => {
         <Categories />
 
         {/* FEATURED  */}
+        <FeaturedRow
+          id="1"
+          title="Featured"
+          description="Paid placements from our partners"
+          featuredCategory="featured"
+        />
+        {/* TASTY DISCOUNTS  */}
+        <FeaturedRow
+          id="2"
+          title="Tasy Discounts"
+          description="Everone's been enjoying these juicy discounts"
+          featuredCategory="discounts"
+        />
+        {/* OFFER NEAR YOU  */}
+        <FeaturedRow
+          id="3"
+          title="Offers near you"
+          description="Why not support local restaurant tonight"
+          featuredCategory="offers"
+        />
       </ScrollView>
     </SafeAreaView>
   );
