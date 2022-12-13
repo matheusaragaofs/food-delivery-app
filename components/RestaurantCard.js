@@ -2,11 +2,12 @@ import { View, Text, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import { AntDesign, SimpleLineIcons as SimpleLine } from "@expo/vector-icons";
 import { styled } from "nativewind";
+import { urlFor } from "../sanity";
 const AntDesignIcon = styled(AntDesign);
 const SimpleLineIcons = styled(SimpleLine);
 const RestaurantCard = ({
   imgUrl,
-  title,
+  name,
   rating,
   genre,
   address,
@@ -20,15 +21,15 @@ const RestaurantCard = ({
       <Image
         className="w-64 h-36"
         source={{
-          uri: "https://vivariomarrecife.com.br/wp-content/uploads/sites/10/2018/07/KFC_Balde-de-frango.jpg",
+          uri: urlFor(imgUrl).url(),
         }}
       />
       <View className="bg-white p-3 space-y-1">
-        <Text className="font-bold text-lg">{title}</Text>
+        <Text className="font-bold text-lg">{name}</Text>
         <View className="flex flex-row space-x-2">
           <AntDesignIcon name="star" size={20} color="#90b18c" />
           <Text className="text-gray-400">
-            <Text className="text-[#90b18c]">{rating}</Text> · {genre}
+            <Text className="text-[#90b18c]">{rating}</Text>
           </Text>
         </View>
         <View className="flex flex-row space-x-2">

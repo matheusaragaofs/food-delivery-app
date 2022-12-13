@@ -1,49 +1,31 @@
 import { View, Text, ScrollView, Image, FlatList } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import RestaurantCard from "./RestaurantCard";
 import { AntDesign } from "@expo/vector-icons";
 import { styled } from "nativewind";
 const AntDesignIcon = styled(AntDesign);
+import sanityClient from "../sanity";
 
-const dummyData = [
-  {
-    imgUrl:
-      "https://vivariomarrecife.com.br/wp-content/uploads/sites/10/2018/07/KFC_Balde-de-frango.jpg",
-    title: "KFC",
-    rating: 4.2,
-    genre: "Sushi",
-    address: "Imbiribeira",
-    short_description: "",
-    dishes: "",
-    long: "",
-    lat: "",
-  },
-  {
-    imgUrl:
-      "https://vivariomarrecife.com.br/wp-content/uploads/sites/10/2018/07/KFC_Balde-de-frango.jpg",
-    title: "Mc Donalds",
-    rating: 3.7,
-    genre: "Mexican",
-    address: "Boa Viagem",
-    short_description: "",
-    dishes: "",
-    long: "",
-    lat: "",
-  },
-  {
-    imgUrl:
-      "https://vivariomarrecife.com.br/wp-content/uploads/sites/10/2018/07/KFC_Balde-de-frango.jpg",
-    title: "Subway",
-    rating: 1.2,
-    genre: "Fat Food",
-    address: "Recife",
-    short_description: "",
-    dishes: "",
-    long: "",
-    lat: "",
-  },
-];
 const FeaturedRow = ({ id, title, description, featuredCategory }) => {
+  const [restaurants, setRestaurants] = useState();
+  useEffect(() => {
+    sanityClient
+      .fetch(
+        `
+    *[_type == 'featured' && _id == $id  ]  {
+      ...,
+      restaurants[] -> {
+        ..., 
+        dishes[] -> 
+      }
+     }[0]
+    `,
+        { id }
+      )
+      .then((data) => {
+        setRestaurants(data?.restaurants);
+      });
+  }, []);
   return (
     <View className="py-4">
       {/* TITLE */}
@@ -61,16 +43,20 @@ const FeaturedRow = ({ id, title, description, featuredCategory }) => {
       </View>
       {/* CARD SECTION */}
       <FlatList
-        data={dummyData}
+        data={restaurants}
         horizontal
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={{
           paddingHorizontal: 15,
           paddingTop: 15,
         }}
-        keyExtractor={(item) => item.title}
+        keyExtractor={(item) => item._id}
         renderItem={({ item: restaurant }) => (
-          <RestaurantCard {...restaurant} />
+          <RestaurantCard
+            key={restaurant._id}
+            {...restaurant}
+            imgUrl={restaurant.image.asset._ref}
+          />
         )}
       />
     </View>
