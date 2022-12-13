@@ -3,21 +3,17 @@ import React from "react";
 import { AntDesign, SimpleLineIcons as SimpleLine } from "@expo/vector-icons";
 import { styled } from "nativewind";
 import { urlFor } from "../sanity";
+import { useNavigation } from "@react-navigation/native";
 const AntDesignIcon = styled(AntDesign);
 const SimpleLineIcons = styled(SimpleLine);
-const RestaurantCard = ({
-  imgUrl,
-  name,
-  rating,
-  genre,
-  address,
-  short_description,
-  dishes,
-  long,
-  lat,
-}) => {
+const RestaurantCard = (props) => {
+  const { imgUrl, name, rating, address } = props;
+  const navigation = useNavigation();
   return (
-    <TouchableOpacity className="mr-3 bg-white shadow">
+    <TouchableOpacity
+      onPress={() => navigation.navigate("Restaurant", { ...props })}
+      className="mr-3 bg-white shadow"
+    >
       <Image
         className="w-64 h-36"
         source={{
