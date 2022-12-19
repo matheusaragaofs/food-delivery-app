@@ -6,6 +6,7 @@ import { urlFor } from "../sanity";
 import { AntDesign } from "@expo/vector-icons";
 import { EvilIcons } from "@expo/vector-icons";
 import DishRow from "../components/DishRow";
+import BasketIcon from "../components/BasketIcon";
 const Restaurant = () => {
   const {
     params: { name, rating, genre, dishes, address, imgUrl, short_description },
@@ -18,6 +19,8 @@ const Restaurant = () => {
   }, []);
 
   return (
+    <>
+    <BasketIcon/>
     <SafeAreaView>
       <ScrollView>
         <View className="relative">
@@ -78,7 +81,7 @@ const Restaurant = () => {
             />
           </TouchableOpacity>
         </View>
-        <View>
+        <View className='pb-36'>
           <Text className="px-4 pt-6 mb-3 font-bold text-xl">Menu</Text>
             {/* DishRows */}
             {dishes.map(dish => (
@@ -94,6 +97,7 @@ const Restaurant = () => {
         </View>
       </ScrollView>
     </SafeAreaView>
+              </>
   );
 };
 

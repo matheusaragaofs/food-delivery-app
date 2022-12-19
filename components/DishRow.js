@@ -47,11 +47,12 @@ const DishRow = ({ key, id, name, description, price, image }) => {
         <View className="bg-white px-4 pt-2">
           <View className="flex-row items-center space-x-2 pb-3">
             <TouchableOpacity 
+              disabled={!items.length}
             onPress={removeItemFromBasket}>
               <AntDesign
                 name="minuscircle"
                 size={40}
-                color="#00ccbb"
+                color={items.length > 0 ? '#00ccbb' : 'gray'}
                 style={{ opacity: 0.5 }}
               />
             </TouchableOpacity>
