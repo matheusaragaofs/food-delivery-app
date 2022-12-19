@@ -6,6 +6,7 @@ const Stack = createNativeStackNavigator();
 //test
 
 import { Home, Restaurant } from "./screens";
+import Basket from "./screens/Basket";
 import { store } from "./store";
 
 export default function App() {
@@ -16,6 +17,9 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Restaurant" component={Restaurant} />
+        <Stack.Screen name="Basket" 
+        options={{presentation: 'modal', headerShown: false}}
+        component={Basket} />
       </Stack.Navigator>
       </Provider>
     </NavigationContainer>

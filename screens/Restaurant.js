@@ -1,16 +1,26 @@
 import { View, Text, ScrollView, Image, TouchableOpacity } from "react-native";
-import React, { useLayoutEffect } from "react";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import React, { useEffect, useLayoutEffect } from "react";
+import { useFocusEffect, useNavigation, useRoute } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { urlFor } from "../sanity";
 import { AntDesign } from "@expo/vector-icons";
 import { EvilIcons } from "@expo/vector-icons";
 import DishRow from "../components/DishRow";
 import BasketIcon from "../components/BasketIcon";
+import { useDispatch } from "react-redux";
+import { setRestaurant } from "../features/restaurantSlice";
 const Restaurant = () => {
+  const dispatch = useDispatch()
   const {
-    params: { name, rating, genre, dishes, address, imgUrl, short_description },
+    params: { name, rating, genre, dishes, address, imgUrl, short_description, lat, long },
   } = useRoute();
+  
+  useEffect(() => {
+    dispatch(setRestaurant({
+      name, rating, genre, dishes, address, imgUrl, short_description, lat, long
+    }))
+  } , [dispatch])
+  
   const navigation = useNavigation();
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -18,6 +28,7 @@ const Restaurant = () => {
     });
   }, []);
 
+  
   return (
     <>
     <BasketIcon/>
