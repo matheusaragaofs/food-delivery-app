@@ -17,7 +17,7 @@ const Restaurant = () => {
   
   useEffect(() => {
     dispatch(setRestaurant({
-      name, rating, genre, dishes, address, imgUrl, short_description, lat, long
+      title: name, rating, genre, dishes, address, imgUrl, short_description, lat, long
     }))
   } , [dispatch])
   
