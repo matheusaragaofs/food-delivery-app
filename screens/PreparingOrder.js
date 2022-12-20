@@ -9,9 +9,9 @@ const PreparingOrder = () => {
     
     useEffect(() => {
         setTimeout(() => {
-            navigation.navigate('Basket')
+            navigation.navigate('Delivery')
         }
-        , 4000)
+        , 2000)
     }, [])
     
   return (
