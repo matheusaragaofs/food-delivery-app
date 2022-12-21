@@ -6,7 +6,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { addToBasket, selectBasketItemsWithId,  removeFromBasket} from "../features/basketSlice";
 
-const DishRow = ({ key, id, name, description, price, image }) => {
+const DishRow = ({  id, name, description, price, image }) => {
   const [isPressed, setIsPressed] = useState(false);
   const dispatch = useDispatch()
   const items = useSelector((state) => selectBasketItemsWithId(state, id))

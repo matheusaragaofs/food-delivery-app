@@ -95,9 +95,8 @@ const Restaurant = () => {
         <View className='pb-36'>
           <Text className="px-4 pt-6 mb-3 font-bold text-xl">Menu</Text>
             {/* DishRows */}
-            {dishes.map(dish => (
+            {dishes.map((dish, index) => (
               <DishRow
-                key={dish._id}
                 id={dish._id}
                 name={dish.name}
                 description={dish.short_description }
